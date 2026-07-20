@@ -1,5 +1,5 @@
 import psycopg2
-
+from models import Worker
 con = psycopg2.connect(
     host = 'localhost',
     database = 'employee-manager',
@@ -7,13 +7,27 @@ con = psycopg2.connect(
     password = '1234',
     port = '5432'
 )
+con.autocommit = True
 cur = con.cursor()
+cur.execute('''CREATE EXTENSION IF NOT EXISTS pgcrypto''')
 
 def create_table():
     cur.execute('''CREATE TABLE IF NOT EXISTS employee(
-        id BIGSERIAL PRIMARY KEY,
+        worker_id BIGSERIAL PRIMARY KEY,
         first_name VARCHAR(50),
         last_name VARCHAR(50),
         bday DATE,
-        post VARVHAR(50),
+        post VARCHAR(50),
         salary INTEGER)''')
+    
+def add_employee_base(first_name,last_name,bday,post,salary):
+    cur.execute('''INSERT INTO employee(first_name,last_name,bday,post,salary) VALUES(%s, %s, %s, %s, %s)''', (first_name, last_name, bday, post, salary))
+    worker = Worker(
+        None,
+        first_name,
+        last_name,
+        bday,
+        post,
+        salary
+    )
+    return worker

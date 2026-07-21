@@ -1,5 +1,5 @@
 from models import Worker
-from database import add_employee_base, find_by_id, find_by_name
+from database import add_employee_base, find_by_id, find_by_name, show_all_base
 
 def add_employee():
     print('===Добавление сотрудника===')
@@ -25,3 +25,8 @@ def find_worker():
         workers = find_by_name(worker_name)
         for work in workers:
             work.find_worker_models()
+
+def show_all():
+    worker = show_all_base()
+    for workers in worker:
+        workers.show_all_models()

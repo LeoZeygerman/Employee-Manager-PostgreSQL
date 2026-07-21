@@ -59,3 +59,18 @@ def find_by_name(first_name):
         )
         workers.append(worker)
     return workers
+
+def show_all_base():
+    cur.execute('''SELECT * FROM employee''')
+    workers = []
+    for row in cur:
+        worker = Worker(
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+        )
+        workers.append(worker)
+    return workers

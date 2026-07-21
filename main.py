@@ -1,5 +1,5 @@
 from database import create_table
-from logic import add_employee, find_worker
+from logic import add_employee, find_worker, show_all
 while True:
     try:
         create_table()
@@ -14,7 +14,9 @@ while True:
         
         if choice == 1:
             add_employee()
-        if choice == 2:
+        elif choice == 2:
             find_worker()
+        elif choice == 3:
+            show_all()
     except ValueError:
         print('Ошибка при вводе!')

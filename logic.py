@@ -1,5 +1,5 @@
 from models import Worker
-from database import add_employee_base, find_by_id
+from database import add_employee_base, find_by_id, find_by_name
 
 def add_employee():
     print('===Добавление сотрудника===')
@@ -13,10 +13,15 @@ def add_employee():
     
 def find_worker():
     print('1.Найти работника по ID')
-    print('2.Найти работника/ов по имени')
+    print('2.Найти работника(ов) по имени')
     choice = int(input('Ваш выбор: '))
     
     if choice == 1:
         worker_id = int(input('Введите ID пользователя: '))
         worker = find_by_id(worker_id)
         worker.find_worker_models()
+    elif choice == 2:
+        worker_name = input('Введите имя работника(ов), которого(ых) хотите найти: ')
+        workers = find_by_name(worker_name)
+        for work in workers:
+            work.find_worker_models()

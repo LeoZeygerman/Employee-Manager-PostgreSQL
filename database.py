@@ -44,3 +44,18 @@ def find_by_id(worker_id):
             row[5],
         )
         return worker
+    
+def find_by_name(first_name):
+    cur.execute('''SELECT * FROM employee WHERE first_name = %s''', (first_name,))
+    workers = []
+    for row in cur:
+        worker = Worker(
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+        )
+        workers.append(worker)
+    return workers

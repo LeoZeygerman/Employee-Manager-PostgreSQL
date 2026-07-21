@@ -1,5 +1,5 @@
 from models import Worker
-from database import add_employee_base, find_by_id, find_by_name, show_all_base
+from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base
 
 def add_employee():
     print('===Добавление сотрудника===')
@@ -30,3 +30,8 @@ def show_all():
     worker = show_all_base()
     for workers in worker:
         workers.show_all_models()
+
+def delete_worker():
+    worker_id = int(input('Введите ID пользователя, которого хотите удалить: '))
+    worker = delete_worker_base(worker_id)
+    worker.delete_worker_models()

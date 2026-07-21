@@ -15,3 +15,6 @@ class Worker:
         
     def show_all_models(self):
         print(f'========================================================================================================\nID: {self.id} | Имя: {self.first_name} | Фамилия: {self.last_name} | Дата рождение: {self.bday} | Должность: {self.post} | Зарплата: {self.salary}\n========================================================================================================')
+        
+    def delete_worker_models(self):
+        print(f'Сотрудник {self.first_name} {self.last_name} удален!')

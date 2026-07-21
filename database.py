@@ -74,3 +74,18 @@ def show_all_base():
         )
         workers.append(worker)
     return workers
+
+def delete_worker_base(worker_id):
+    cur.execute('''SELECT * FROM employee WHERE worker_id = %s''', (worker_id,))
+    for row in cur:
+        worker = Worker(
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+        )
+        cur.execute('''DELETE FROM employee WHERE worker_id = %s''', (worker_id,))
+        return worker
+    

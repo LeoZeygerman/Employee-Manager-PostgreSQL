@@ -31,3 +31,16 @@ def add_employee_base(first_name,last_name,bday,post,salary):
         salary
     )
     return worker
+
+def find_by_id(worker_id):
+    cur.execute('''SELECT * FROM employee WHERE worker_id = %s''', (worker_id,))
+    for row in cur:
+        worker = Worker(
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+        )
+        return worker

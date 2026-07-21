@@ -9,3 +9,7 @@ class Worker:
         
     def add_worker_models(self):
         print(f'==========\nИмя: {self.first_name}\nФамилия: {self.last_name}\nДата рождение: {self.bday}\nДолжность: {self.post}\nЗарплата: {self.salary}\n==========')
+        
+    def find_worker_models(self):
+        print(f'==========\nID: {self.id}\nИмя: {self.first_name}\nФамилия: {self.last_name}\nДата рождение: {self.bday}\nДолжность: {self.post}\nЗарплата: {self.salary}\n==========')
+        

@@ -1,5 +1,5 @@
 from models import Worker
-from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base, add_fine_bonus_base, show_history_base
+from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base, add_fine_bonus_base, show_history_base, get_total
 
 def add_employee():
     print('===Добавление сотрудника===')
@@ -20,6 +20,16 @@ def find_worker():
         worker_id = int(input('Введите ID пользователя: '))
         worker = find_by_id(worker_id)
         worker.find_worker_models()
+        print(f'Хотите ли посмотреть финальную выплату с учетом бонусов/штрафов?\n1.Да\n2.Нет')
+        fine_bonus_choice = int(input('Ваш выбор: '))
+        
+        if fine_bonus_choice == 1:
+            total = get_total(worker_id)
+            print(f'Финальная выплата {worker.first_name}: {total}')
+        
+        elif fine_bonus_choice == 2:
+            pass
+        
     elif choice == 2:
         worker_name = input('Введите имя работника(ов), которого(ых) хотите найти: ')
         workers = find_by_name(worker_name)
@@ -58,6 +68,6 @@ def add_fine_bonus():
         salary.show_salary()
     
     elif choice == 3:
-        result = show_history_base()
+        result = show_history_base(worker_id)
         for total in result:
             total.show_salary_all()

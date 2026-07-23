@@ -52,7 +52,7 @@ def find_by_id(worker_id):
         return worker
     
 def find_by_name(first_name):
-    cur.execute('''SELECT * FROM employee WHERE first_name = %s''', (first_name,))
+    cur.execute('''SELECT * FROM employee WHERE LOWER(first_name) = LOWER(%s)''', (first_name,))
     workers = []
     for row in cur:
         worker = Worker(
@@ -97,7 +97,7 @@ def delete_worker_base(worker_id):
     
 def add_fine_bonus_base(worker_id, type, amount, reason):
     cur.execute('''INSERT INTO salary VALUES(%s,%s,%s,%s)''', (worker_id, type, amount, reason))
-    cur.execute('''SELECT * FROM salary WHERE worker_id = %s''', (worker_id))
+    cur.execute('''SELECT * FROM salary WHERE worker_id = %s''', (worker_id,))
     for row in cur:
         sal = Salary(
             row[0],
@@ -105,7 +105,7 @@ def add_fine_bonus_base(worker_id, type, amount, reason):
             row[2],
             row[3]
         )
-        return sal
+    return sal
     
 def show_history_base(worker_id):
     cur.execute('''SELECT * FROM salary WHERE worker_id = %s''', (worker_id,))
@@ -118,4 +118,16 @@ def show_history_base(worker_id):
             row[3]
         )
         total.append(sal)
+    return total
+
+def get_total(worker_id):
+    cur.execute('''SELECT salary FROM employee WHERE worker_id = %s''', (worker_id,))
+    salary = cur.fetchone()[0]
+    cur.execute('''SELECT SUM(amount) FROM salary WHERE worker_id = %s AND type = 'Бонус' ''', (worker_id,))
+    bonus = cur.fetchone()[0]
+    bonus = bonus or 0
+    cur.execute('''SELECT SUM(amount) FROM salary WHERE worker_id = %s AND type = 'Штраф' ''', (worker_id,))
+    fine = cur.fetchone()[0]
+    fine = fine or 0
+    total = salary + bonus - fine
     return total

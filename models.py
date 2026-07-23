@@ -27,7 +27,7 @@ class Salary:
         self.reason = reason
         
     def show_salary(self):
-        print(f'- ID: {self.worker_id} | Тип: {self.type}\nРазмер: {self.amount}\nПричина: {self.reason}')
+        print(f'===============\nID: {self.worker_id} | Тип: {self.type}\nРазмер: {self.amount}\nПричина: {self.reason}')
         
     def show_salary_all(self):
             print(f'=============================================\nID: {self.worker_id} | Тип: {self.type}\nРазмер: {self.amount}\nПричина: {self.reason}\n=============================================')

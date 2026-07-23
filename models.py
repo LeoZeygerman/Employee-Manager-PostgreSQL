@@ -18,3 +18,13 @@ class Worker:
         
     def delete_worker_models(self):
         print(f'Сотрудник {self.first_name} {self.last_name} удален!')
+    
+class Salary:
+    def __init__(self, worker_id, type, amount, reason):
+        self.worker_id = worker_id
+        self.type = type
+        self.amount = amount
+        self.reason = reason
+        
+    def show_salary(self):
+        print(f'- ID: {self.worker_id} | Тип: {self.type}\nРазмер: {self.amount}\nПричина: {self.reason}')

@@ -20,6 +20,12 @@ def create_table():
         post VARCHAR(50),
         salary INTEGER)''')
     
+    cur.execute('''CREATE TABLE IF NOT EXISTS salary(
+        worker_id INTEGER,
+        type VARCHAR(5),
+        amount INTEGER,
+        reason VARCHAR(50))''')
+    
 def add_employee_base(first_name,last_name,bday,post,salary):
     cur.execute('''INSERT INTO employee(first_name,last_name,bday,post,salary) VALUES(%s, %s, %s, %s, %s)''', (first_name, last_name, bday, post, salary))
     worker = Worker(
@@ -89,3 +95,5 @@ def delete_worker_base(worker_id):
         cur.execute('''DELETE FROM employee WHERE worker_id = %s''', (worker_id,))
         return worker
     
+def add_fine_bonus_base(worker_id, type, amount, reason):
+    cur.execute('''INSERT INTO salary VALUES(%s,%s,%s,%s)''', (worker_id, type, amount, reason))

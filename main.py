@@ -20,5 +20,8 @@ while True:
             show_all()
         elif choice == 5:
             delete_worker()
+        elif choice == 6:
+            print('Программа завершена!')
+            exit()
     except ValueError, AttributeError:
         print('Ошибка при вводе!')

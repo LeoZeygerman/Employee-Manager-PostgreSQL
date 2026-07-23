@@ -1,5 +1,5 @@
 from models import Worker
-from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base
+from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base, add_fine_bonus_base
 
 def add_employee():
     print('===Добавление сотрудника===')
@@ -35,3 +35,24 @@ def delete_worker():
     worker_id = int(input('Введите ID пользователя, которого хотите удалить: '))
     worker = delete_worker_base(worker_id)
     worker.delete_worker_models()
+    
+def add_fine_bonus():
+    worker_id = int(input('Введите ID сотрудника: '))
+    print('1.Добавить штраф.')
+    print('2.Добавить бонус.')
+    print('3.Посмотреть историю штрафов/бонусов.')
+    choice = int(input('Ваш выбор: '))
+
+    if choice == 1:
+        type = 'Штраф'
+        amount = int(input('Введите размер штрафа: '))
+        reason = input('Причина штрафа: ')
+        salary = add_fine_bonus_base(worker_id, type, amount, reason)
+        salary.show_salary()
+    
+    elif choice == 2:
+        type = 'Бонус'
+        amount = int(input('Введите размер бонуса: '))
+        reason = input('Причина бонуса: ')
+        salary = add_fine_bonus_base(worker_id, type, amount, reason)
+        salary.show_salary()

@@ -1,5 +1,5 @@
 import psycopg2
-from models import Worker
+from models import Worker, Salary
 con = psycopg2.connect(
     host = 'localhost',
     database = 'employee-manager',
@@ -97,3 +97,12 @@ def delete_worker_base(worker_id):
     
 def add_fine_bonus_base(worker_id, type, amount, reason):
     cur.execute('''INSERT INTO salary VALUES(%s,%s,%s,%s)''', (worker_id, type, amount, reason))
+    cur.execute('''SELECT * FROM salary WHERE worker_id = %s''', (worker_id))
+    for row in cur:
+        sal = Salary(
+            row[0],
+            row[1],
+            row[2],
+            row[3]
+        )
+        return sal

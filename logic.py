@@ -1,5 +1,5 @@
 from models import Worker
-from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base, add_fine_bonus_base
+from database import add_employee_base, find_by_id, find_by_name, show_all_base, delete_worker_base, add_fine_bonus_base, show_history_base
 
 def add_employee():
     print('===Добавление сотрудника===')
@@ -56,3 +56,8 @@ def add_fine_bonus():
         reason = input('Причина бонуса: ')
         salary = add_fine_bonus_base(worker_id, type, amount, reason)
         salary.show_salary()
+    
+    elif choice == 3:
+        result = show_history_base()
+        for total in result:
+            total.show_salary_all()

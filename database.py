@@ -106,3 +106,16 @@ def add_fine_bonus_base(worker_id, type, amount, reason):
             row[3]
         )
         return sal
+    
+def show_history_base(worker_id):
+    cur.execute('''SELECT * FROM salary WHERE worker_id = %s''', (worker_id,))
+    total = []
+    for row in cur:
+        sal = Salary(
+            row[0],
+            row[1],
+            row[2],
+            row[3]
+        )
+        total.append(sal)
+    return total
